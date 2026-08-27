@@ -1,0 +1,84 @@
+CREATE DATABASE SARAAURA;
+USE SARAAURA;
+
+CREATE TABLE Category(
+    Category INT PRIMARY KEY,
+    CategoryName VARCHAR(50)
+);
+
+CREATE TABLE Product
+(
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10,2),
+    Stock INT,
+    Category INT,
+    FOREIGN KEY (Category)
+    REFERENCES Category(Category)
+);
+
+INSERT INTO Category VALUES
+(1, "SKINCARE"),
+(2, "MAKEUP"),
+(3, "HAIR CARE"),
+(4, "PERSONAL CARE"),
+(5, "FRAGRANCE"),
+(6, "BEAUTY TOOLS");
+
+SELECT * FROM Category;
+
+INSERT INTO Product VALUES
+(101, "FACE WASH", 350, 40, 1),
+(102, "MOISTURIZER", 650, 30, 1),
+(103, "SUNSCREEN", 750, 25, 1),
+(104, "FACE SERUM", 899, 20, 1),
+(105, "FACE MASK", 450, 35, 1),
+
+(106, "LIQUID FOUNDATION", 850, 25, 2),
+(107, "COMPACT POWDER", 550, 30, 2),
+(108, "LIPSTICK", 499, 40, 2),
+(109, "EYELINER", 350, 35, 2),
+(110, "MASCARA", 600, 25, 2),
+
+(111, "SHAMPOO", 550, 35, 3),
+(112, "CONDITIONER", 500, 30, 3),
+(113, "HAIR SERUM", 650, 25, 3),
+(114, "HAIR MASK", 750, 20, 3),
+(115, "HAIR OIL", 450, 40, 3),
+
+(116, "BODY WASH", 450, 35, 4),
+(117, "BODY LOTION", 550, 30, 4),
+(118, "BODY SCRUB", 650, 25, 4),
+(119, "HAND CREAM", 300, 40, 4),
+(120, "BATH SALT", 400, 25, 4),
+
+(121, "EAU DE PARFUM", 1200, 20, 5),
+(122, "BODY MIST", 750, 25, 5),
+(123, "PERFUME", 1500, 15, 5),
+(124, "ROLL ON", 350, 30, 5),
+(125, "FRAGRANCE SET", 1800, 10, 5),
+
+(126, "MAKEUP BRUSH SET", 850, 20, 6),
+(127, "BEAUTY BLENDER", 350, 30, 6),
+(128, "EYELASH CURLER", 250, 35, 6),
+(129, "FACE ROLLER", 500, 20, 6),
+(130, "MAKEUP MIRROR", 900, 15, 6);
+
+SELECT * FROM Product;
+
+UPDATE Product
+SET Price = 400,
+    Stock = 45
+WHERE ProductID = 101;
+
+SELECT * FROM Product
+WHERE ProductID = 101;
+
+DELETE FROM Product
+WHERE ProductID = 108;
+
+DELETE FROM Product
+WHERE Category = 5;
+
+SELECT * FROM Product
+ORDER BY Category;
