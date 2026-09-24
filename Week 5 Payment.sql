@@ -1,0 +1,65 @@
+USE SARAAURA;
+
+CREATE TABLE Payment
+(
+    PaymentID INT PRIMARY KEY,
+    OrderID INT,
+    PaymentMode VARCHAR(20),
+    PaymentDate DATE,
+    PaymentAmount DECIMAL(10,2),
+    PaymentStatus VARCHAR(20),
+    FOREIGN KEY (OrderID)
+    REFERENCES Orders(OrderID)
+);
+
+INSERT INTO Payment VALUES
+(601, 401, 'UPI', '2026-09-01', 800, 'SUCCESSFUL'),
+(602, 402, 'CARD', '2026-09-02', 750, 'SUCCESSFUL'),
+(603, 403, 'CASH', '2026-09-03', 1100, 'SUCCESSFUL'),
+(604, 404, 'UPI', '2026-09-04', 850, 'FAILED'),
+(605, 405, 'CARD', '2026-09-05', 1350, 'SUCCESSFUL'),
+(606, 406, 'CASH', '2026-09-06', 650, 'SUCCESSFUL'),
+(607, 407, 'UPI', '2026-09-07', 1798, 'SUCCESSFUL'),
+(608, 408, 'CARD', '2026-09-08', 850, 'FAILED'),
+(609, 409, 'CASH', '2026-09-09', 1100, 'SUCCESSFUL'),
+(610, 410, 'UPI', '2026-09-10', 350, 'SUCCESSFUL'),
+(611, 411, 'CARD', '2026-09-11', 1200, 'SUCCESSFUL'),
+(612, 412, 'CASH', '2026-09-12', 500, 'FAILED'),
+(613, 413, 'UPI', '2026-09-13', 1300, 'SUCCESSFUL'),
+(614, 414, 'CARD', '2026-09-14', 750, 'SUCCESSFUL'),
+(615, 415, 'CASH', '2026-09-15', 1350, 'SUCCESSFUL'),
+(616, 416, 'UPI', '2026-09-16', 900, 'FAILED'),
+(617, 417, 'CARD', '2026-09-17', 550, 'SUCCESSFUL'),
+(618, 418, 'CASH', '2026-09-18', 1300, 'SUCCESSFUL'),
+(619, 419, 'UPI', '2026-09-19', 850, 'SUCCESSFUL'),
+(620, 420, 'CARD', '2026-09-20', 1800, 'SUCCESSFUL');
+
+SELECT * FROM Payment;
+
+UPDATE Payment
+SET PaymentStatus = 'SUCCESSFUL'
+WHERE PaymentID = 604;
+
+SELECT * FROM Payment
+WHERE PaymentStatus = 'SUCCESSFUL';
+
+SELECT * FROM Payment
+WHERE PaymentStatus = 'FAILED';
+
+SELECT * FROM Payment
+WHERE PaymentMode = 'UPI';
+
+SELECT * FROM Payment
+WHERE PaymentMode = 'CARD';
+
+SELECT * FROM Payment
+WHERE PaymentMode = 'CASH';
+
+SELECT PaymentMode, COUNT(*) AS NoOfTransactions
+FROM Payment
+GROUP BY PaymentMode;
+
+SELECT PaymentMode, SUM(PaymentAmount) AS TotalAmountReceived
+FROM Payment
+WHERE PaymentStatus = 'SUCCESSFUL'
+GROUP BY PaymentMode;
